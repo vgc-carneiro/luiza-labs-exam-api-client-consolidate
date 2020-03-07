@@ -17,7 +17,17 @@ router.post('/', authService.authenticationMiddleware(), function(req, res) {
 router.patch('/', authService.authenticationMiddleware(), function(req, res) {
 	log.info('/', req.body);
 	log.info('/', req.headers.token);
-	controller.updateClient(req.body.name, req.body.email).then((result) => {
+	controller.updateClient(req.body.name, req.body.email, true).then((result) => {
+		res.status(200).send(result);
+	}).catch((e) => {
+		res.status(e.status).send(e.data);
+	});
+});
+
+router.delete('/', authService.authenticationMiddleware(), function(req, res) {
+	log.info('/', req.body);
+	log.info('/', req.headers.token);
+	controller.updateClient(null, req.body.email, false).then((result) => {
 		res.status(200).send(result);
 	}).catch((e) => {
 		res.status(e.status).send(e.data);

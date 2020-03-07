@@ -20,16 +20,24 @@ function addClient(name, email){
 	});
 }
 
-function updateClient(name, email){
+function updateClient(name, email, active){
 	return new Promise((resolve, reject) => {
-		if(!email && !name){
+		if(!email){
 			reject({status: 400, data: {message: 'Falta de parâmetros.'}});
 		}else{
 			mongoService.getClient(email).then((result) => {
 				if(!result){
 					reject({status: 404, data: {message: 'Cliente não localizado.'}});
 				}else{
-					return mongoService.updateClient(result._id, name, email);
+					let data = {
+						email: email,
+						active: active,
+						lastUpdated: new Date()
+					};
+					if(name){
+						data.name = name;
+					}
+					return mongoService.updateClient(result._id, data);
 				}
 			}).then((result) => {
 				resolve(result);
