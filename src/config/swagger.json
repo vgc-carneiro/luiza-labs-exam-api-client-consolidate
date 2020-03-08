@@ -1,0 +1,142 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Swagger for a LUIZA-LABS-EXAM, Client Consolidator.",
+        "version": "1.0.0",
+		"title": "Swagger LUIZA-LABS-EXAM, Client Consolidator.",
+        "contact": {
+            "email": "vgc.carneiro@gmail.com"
+        }
+    },
+    "schemes": ["http"],
+    "tags": [{
+        "name": "client",
+        "description": "Everything related to a clients"
+    }],
+    "paths": {
+        "/": {
+            "post": {
+                "tags": ["client"],
+                "summary": "Insert client",
+                "produces": ["application/json"],
+                "parameters": [{
+                    "name": "token",
+                    "in": "header",
+                    "description": "Token with JWT",
+                    "required": true,
+                    "type": "string"
+                },{
+					"name": "name",
+                    "in": "body",
+                    "description": "Name of a client.",
+                    "required": true,
+                    "type": "string"
+				},{
+					"name": "email",
+                    "in": "body",
+                    "description": "Email of a client",
+                    "required": true,
+                    "type": "String"
+				}],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/client"
+                        }
+					}
+                }
+			},
+			"patch": {
+                "tags": ["client"],
+                "summary": "Update client",
+                "produces": ["application/json"],
+                "parameters": [{
+                    "name": "token",
+                    "in": "header",
+                    "description": "Token with JWT",
+                    "required": true,
+                    "type": "string"
+                },{
+					"name": "name",
+                    "in": "body",
+                    "description": "Name of a client.",
+                    "required": false,
+                    "type": "string"
+				},{
+					"name": "email",
+                    "in": "body",
+                    "description": "Email of a client",
+                    "required": true,
+                    "type": "String"
+				}],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/client"
+                        }
+					}
+                }
+			},
+			"delete": {
+                "tags": ["client"],
+                "summary": "Update client",
+                "produces": ["application/json"],
+                "parameters": [{
+                    "name": "token",
+                    "in": "header",
+                    "description": "Token with JWT",
+                    "required": true,
+                    "type": "string"
+                },{
+					"name": "email",
+                    "in": "body",
+                    "description": "Email of a client",
+                    "required": true,
+                    "type": "String"
+				}],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "$ref": "#/definitions/client"
+                        }
+					}
+                }
+			}
+		}
+	},
+	"definitions": {
+		"client": {
+			"type": "object",
+			"properties": {
+				"_id": {
+					"type": "string",
+					"description": "Hash do cliente."
+				},
+				"name": {
+					"type": "string",
+					"description": "Nome do cliente."
+				},
+				"email": {
+					"type": "String",
+					"description": "Email do client."
+				},
+				"active": {
+					"type": "Boolean",
+					"description": "Boolean para determinar se o cliente está ativo ou não"
+				},
+				"updatedAt": {
+					"type": "String",
+					"description": "Data de atualização"
+				},
+				"createdAt": {
+					"type": "string",
+					"description": "Data de criação"
+				}
+			}
+        }
+	},
+    "externalDocs": {
+        "description": "Find out more about Swagger",
+        "url": "http://swagger.io"
+    }
+}
