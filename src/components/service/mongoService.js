@@ -11,7 +11,7 @@ async function tryConnectToMongo() {
 function getClient(email){
 	return new Promise((resolve, reject) => {
 		tryConnectToMongo().then(() => {
-			Client.findOne({email: email}).then((result) => {
+			Client.findOne({email: email, active: true}).then((result) => {
 				resolve(result);
 			}, (error) => {
 				log.error('getClient:', error);
@@ -26,6 +26,7 @@ function insertClient(name, email){
 		Client.create({
 			name: name,
 			email: email,
+			active: true,
 			updatedAt: new Date(),
 			createdAt: new Date()
 		}).then((result) => {
@@ -36,23 +37,15 @@ function insertClient(name, email){
 	});
 }
 
-function updateClient(id, name, email){
+function updateClient(id, data){
 	return new Promise((resolve, reject) => {
-		Client.findOneAndUpdate({ _id: id}, {
-			name: name,
-			email: email,
-			updatedAt: new Date()
-		}, (err, doc) => {
+		Client.findOneAndUpdate({ _id: id, active: true}, data, (err, doc) => {
 			if(err){
 				log.error('updateClient:', err);
 				reject(err);
 			}else{
 				log.info('Client updated: ', doc);
-				resolve({
-					_id: id,
-					name: name,
-					email: email
-				});
+				resolve(data);
 			}
 		});
 	});
