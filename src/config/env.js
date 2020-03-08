@@ -4,16 +4,16 @@ const config = {
 		env: process.env.APP_ENV
 	},
 	services: {
-		hostname: process.env.DEV_SERVICE_HOSTNAME,
-		port: process.env.DEV_SERVICE_PORT,
-		type: process.env.DEV_SERVICE_TYPE
+		hostname: process.env.SERVICE_HOSTNAME,
+		port: process.env.SERVICE_PORT,
+		type: process.env.SERVICE_TYPE
 	}, 
 	mongo: {
-		host: process.env.DEV_MONGO_HOST,
-		port: process.env.DEV_MONGO_PORT,
-		db: process.env.DEV_MONGO_DB,
-		user: process.env.DEV_MONGO_USER,
-		pass: process.env.DEV_MONGO_PASS
+		host: process.env.MONGO_HOST,
+		port: process.env.MONGO_PORT,
+		db: process.env.MONGO_DB,
+		user: process.env.MONGO_USER,
+		pass: process.env.MONGO_PASS
 	}
 };
 
